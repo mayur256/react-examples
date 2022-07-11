@@ -1,6 +1,8 @@
 // Top level imports
 import { ReactElement, CSSProperties } from "react";
+// Custom components
 import Cell from "../Cell";
+import Piece from "../Piece";
 import Square from "../Square";
 
 // Component definition
@@ -28,7 +30,9 @@ export default function Board(): ReactElement {
             >
                 <Square
                     black={isBlack}
-                />
+                >
+                    {x === 7 && y === 0 ? <Piece /> : null}
+                </Square>
            </Cell>
         )
     }

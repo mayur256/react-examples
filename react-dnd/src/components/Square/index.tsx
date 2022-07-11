@@ -20,7 +20,8 @@ export default function Square({
                 width: '100%',
                 height: '100%',
                 backgroundColor,
-                color
+                color,
+                textAlign: 'center'
             }}
         >
             {children}
