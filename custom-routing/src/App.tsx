@@ -1,15 +1,18 @@
+// Top level imports
+import { ReactElement } from "react";
 
-// Atoms / Molecules/ Organisms
-import Navbar from "./components/organisms/Navbar";
+// Routing Component
+import AppRouter from "./routing/AppRouter";
+
+// App layout
+import LayoutContainer from "./pages/LayoutContainer";
 
 // Main Component definition
-function App() {
+export default function App(): ReactElement {
   // Main JSX
   return (
-    <div>
-      <Navbar />
-    </div>
-  );
+    <AppRouter>
+      <LayoutContainer />
+    </AppRouter>
+  )
 }
-
-export default App;

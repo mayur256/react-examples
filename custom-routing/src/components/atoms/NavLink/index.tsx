@@ -9,7 +9,7 @@ interface IProps {
 // Component definition
 const NavLink = ({ to, children }: IProps): ReactElement => {
     return (
-        <a href={to}>{children}</a>
+        <a href={`/#/${to}`}>{children}</a>
     )
 };
 
