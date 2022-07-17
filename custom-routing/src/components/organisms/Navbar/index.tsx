@@ -12,8 +12,8 @@ const Navbar = (): ReactElement => {
     return (
         <nav>
             <NavLink to="home">Home</NavLink>
-            <NavLink to="home">News</NavLink>
-            <NavLink to="home">Contact</NavLink>
+            <NavLink to="news">News</NavLink>
+            <NavLink to="contact">Contact</NavLink>
         </nav>
     )
 };
