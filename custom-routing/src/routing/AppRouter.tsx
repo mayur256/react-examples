@@ -20,15 +20,14 @@ export const AppNavCtx = createContext<INavCtx | null>(null);
 // Component definition
 export default function AppRouter({ children }: IProps): ReactElement {
     // state declaration
-    const [currentLocation] = useState<INavCtx | null>(null);
-    console.log(useLocation());
+    const [currentLocation, setCurrentLocation] = useState<INavCtx | null>(null);
+
+    // custom location hook
+    const location = useLocation();
 
     useEffect(() => {
-        const onHashChange = (event: HashChangeEvent): void => {
-        };
-
-        window.addEventListener('hashchange', onHashChange);
-    }, [])
+        setCurrentLocation(location);
+    }, [location])
 
     return (
         <AppNavCtx.Provider value={currentLocation}>
