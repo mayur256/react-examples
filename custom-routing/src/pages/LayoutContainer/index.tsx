@@ -8,6 +8,7 @@ import { AppNavCtx } from "../../routing/AppRouter";
 import Home from "../Home";
 import News from "../News";
 import Contact from "../Contact";
+import NotFound from "../NotFound";
 
 // CSS Module
 import "./Layout.module.css";
@@ -19,7 +20,7 @@ import Navbar from "../../components/organisms/Navbar";
 export default function LayoutContainer(): ReactElement {
     // hooks
     const location = useContext(AppNavCtx);
-
+    
     // compute current path
     const currentPath = location?.pathName?.slice(1) ?? '';
 
@@ -33,8 +34,8 @@ export default function LayoutContainer(): ReactElement {
     // Main JSX
     return (
         <>
-            <Navbar />
-            {components[currentPath]?.() ?? <Home />}        
+            <Navbar currentPath={currentPath} />
+            {components[currentPath]?.() ?? <NotFound />}        
         </>
     )
 };
