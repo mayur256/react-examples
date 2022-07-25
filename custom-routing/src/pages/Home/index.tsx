@@ -3,5 +3,9 @@ import { ReactElement } from "react";
 
 // Component definition
 export default function Home(): ReactElement {
-    return <h1>Home</h1>;
+    return (
+        <div className="home">
+            <h1>Home</h1>
+        </div>
+    );
 };

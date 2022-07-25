@@ -11,7 +11,7 @@ import Contact from "../Contact";
 import NotFound from "../NotFound";
 
 // CSS Module
-import "./Layout.module.css";
+import styles from "./Layout.module.css";
 
 // Atoms / Molecules / Organnisms
 import Navbar from "../../components/organisms/Navbar";
@@ -35,7 +35,9 @@ export default function LayoutContainer(): ReactElement {
     return (
         <>
             <Navbar currentPath={currentPath} />
-            {components[currentPath]?.() ?? <NotFound />}        
+            <div className={styles.main}>
+                {components[currentPath]?.() ?? <NotFound />}
+            </div>
         </>
     )
 };
