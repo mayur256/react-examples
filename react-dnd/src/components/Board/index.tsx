@@ -1,5 +1,5 @@
 // Top level imports
-import { ReactElement, CSSProperties } from "react";
+import { ReactElement, CSSProperties, DragEvent } from "react";
 // Custom components
 import Cell from "../Cell";
 import Piece from "../Piece";
@@ -31,7 +31,9 @@ export default function Board(): ReactElement {
                 <Square
                     black={isBlack}
                 >
-                    {x === 7 && y === 0 ? <Piece /> : null}
+                    {(x === 7 && y === 0)
+                        ? <Piece onDragStart={onPieceDragStart}/>
+                        : null}
                 </Square>
            </Cell>
         )
@@ -53,6 +55,15 @@ export default function Board(): ReactElement {
             BoardSquares.push(renderSquare(row, col, color === 'black'));
         }
     }
+
+    /* Handler functions - starts*/
+
+    function onPieceDragStart(event: DragEvent<HTMLSpanElement>) {
+        // set drag effect
+        event.dataTransfer.effectAllowed = 'move';
+    }
+
+    /* Handler functions - ends */
     
     // Main JSX
     return (
