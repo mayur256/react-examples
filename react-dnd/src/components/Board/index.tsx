@@ -5,6 +5,9 @@ import Cell from "../Cell";
 import Piece from "../Piece";
 import Square from "../Square";
 
+// External Modules
+import { dragImage } from "../../dragImage";
+
 // Component definition
 export default function Board(): ReactElement {
 
@@ -32,7 +35,11 @@ export default function Board(): ReactElement {
                     black={isBlack}
                 >
                     {(x === 7 && y === 0)
-                        ? <Piece onDragStart={onPieceDragStart}/>
+                        ? (<Piece
+                            onDragStart={onPieceDragStart}
+                            onDrag={onPieceDrag}
+                            onDragEnd={onPieceDragEnd}
+                        />)
                         : null}
                 </Square>
            </Cell>
@@ -58,9 +65,25 @@ export default function Board(): ReactElement {
 
     /* Handler functions - starts*/
 
+    // drag start event handler
     function onPieceDragStart(event: DragEvent<HTMLSpanElement>) {
         // set drag effect
         event.dataTransfer.effectAllowed = 'move';
+
+        // set drag image
+        const imgEl = new Image();
+        imgEl.src = dragImage;
+
+        event.dataTransfer.setDragImage(imgEl, 10, 10);
+    }
+
+    // drag event handler
+    function onPieceDrag(event: DragEvent<HTMLSpanElement>) {
+    }
+
+    // drag-end event handler
+    function onPieceDragEnd(event: DragEvent<HTMLSpanElement>) {
+        // 
     }
 
     /* Handler functions - ends */
