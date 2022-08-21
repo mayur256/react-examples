@@ -1,5 +1,5 @@
 // Top level imports
-import { ReactElement, CSSProperties, DragEvent } from "react";
+import { useState, ReactElement, CSSProperties, DragEvent } from "react";
 // Custom components
 import Cell from "../Cell";
 import Piece from "../Piece";
@@ -8,8 +8,17 @@ import Square from "../Square";
 // External Modules
 import { dragImage } from "../../dragImage";
 
+type IPiecePos = {
+    x: number,
+    y: number
+}
 // Component definition
 export default function Board(): ReactElement {
+    // state declarations
+    const [piecePos, setPiecePos] = useState<IPiecePos>({
+        x: 0,
+        y: 0
+    })
 
     /** Styling properties applied to the board element */
     const boardStyle: CSSProperties = {
@@ -29,12 +38,17 @@ export default function Board(): ReactElement {
         return (
             <Cell
                 key={`${x}${y}`}
+                data-cell-x={x}
+                data-cell-y={y}
                 style={cellStyle}
+                onDragEnter={onCellDragEnter}
+                onDrop={onCellDrop}
+                onDragOver={onCellDragOver}
             >
                 <Square
                     black={isBlack}
                 >
-                    {(x === 7 && y === 0)
+                    {(x === piecePos.x && y === piecePos.y)
                         ? (<Piece
                             onDragStart={onPieceDragStart}
                             onDrag={onPieceDrag}
@@ -84,7 +98,30 @@ export default function Board(): ReactElement {
     // drag-end event handler
     function onPieceDragEnd(event: DragEvent<HTMLSpanElement>) {
         // 
+    }  
+
+    // dragEnter event handler
+    // this event is fired when a dragged item enters a valid drop target
+    function onCellDragEnter(event: DragEvent<HTMLSpanElement>) {
+        // 
     }
+
+    // drag over event handler
+    function onCellDragOver(event: DragEvent<HTMLSpanElement>) {
+        // set the drop effect type - in most cases it should be compatible to dragEffect
+        event.dataTransfer.dropEffect = "move";
+        event.preventDefault();
+    }
+
+    // onDrop event handler
+    function onCellDrop(event: DragEvent<HTMLSpanElement>) {
+        const { cellX = 0, cellY = 0 } = event.currentTarget.dataset;
+        setPiecePos({
+            x: +cellX,
+            y: +cellY
+        });
+    }
+
 
     /* Handler functions - ends */
     
