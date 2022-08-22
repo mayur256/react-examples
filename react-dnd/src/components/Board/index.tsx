@@ -1,5 +1,5 @@
 // Top level imports
-import { useState, ReactElement, CSSProperties, DragEvent } from "react";
+import { useState, useEffect, ReactElement, CSSProperties, DragEvent } from "react";
 // Custom components
 import Cell from "../Cell";
 import Piece from "../Piece";
@@ -18,7 +18,15 @@ export default function Board(): ReactElement {
     const [piecePos, setPiecePos] = useState<IPiecePos>({
         x: 0,
         y: 0
-    })
+    });
+    const [imgEl, setImgEl] = useState<Element | null>(null);
+
+    // Component did mount
+    useEffect(() => {
+        const imgEl = new Image();
+        imgEl.src = dragImage;
+        setImgEl(imgEl);
+    },[]);
 
     /** Styling properties applied to the board element */
     const boardStyle: CSSProperties = {
@@ -85,10 +93,9 @@ export default function Board(): ReactElement {
         event.dataTransfer.effectAllowed = 'move';
 
         // set drag image
-        const imgEl = new Image();
-        imgEl.src = dragImage;
-
-        event.dataTransfer.setDragImage(imgEl, 10, 10);
+        if (imgEl) {
+            event.dataTransfer.setDragImage(imgEl, 50, 50);
+        }
     }
 
     // drag event handler
