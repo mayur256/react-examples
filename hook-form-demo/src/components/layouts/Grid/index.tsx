@@ -12,10 +12,8 @@ interface IProps extends ComponentPropsWithRef<"div"> {
 // Component definition
 export default function Grid({ children }: IProps): ReactElement {
     return (
-        <div className={`
-            ${classes['display-grid']}
-        `}>
+        <div className={classes['display-grid']}>
             {children}
         </div>
-    )    
+    )
 };
