@@ -24,6 +24,8 @@ export default function Box({
         'space-between': () => classes['justify-content-space-between'],
         'space-around': () => classes['justify-content-space-around'],
         'space-evenly': () => classes['justify-content-space-evenly'],
+        'flex-end': () => classes['justify-content-flex-end'],
+        'flex-start': () => classes['justify-content-flex-start'],
     };
     const justifyClass = flexJustifyContents[justifyContent]?.();
     

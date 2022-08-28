@@ -1,11 +1,11 @@
 // Top level imports
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithRef, Ref } from "react";
 
 // CSS Module
 import classes from "./input.module.css";
 
 /** Prop type definitons */
-interface InputProps extends ComponentPropsWithoutRef<"input"> {
+interface InputProps extends ComponentPropsWithRef<"input"> {
     type: string;
     name: string;
     id: string;
@@ -16,19 +16,19 @@ interface InputProps extends ComponentPropsWithoutRef<"input"> {
 }
 
 // Component definition
-export default function Input({
+const Input = React.forwardRef(({
     type = 'text',
     name = '',
     id = '',
     value = '',
     onChange,
     placeholder = '',
-}: Partial<InputProps>) {
+}: Partial<InputProps>, ref: Ref<HTMLInputElement>) => {
 
     // JSX Code
     return (
-
         <input
+            ref={ref}
             id={id}
             type={type}
             name={name}
@@ -38,4 +38,6 @@ export default function Input({
             className={classes['input']}
         />
     )
-}
+})
+
+export default Input;
