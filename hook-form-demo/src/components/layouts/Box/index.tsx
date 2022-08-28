@@ -5,7 +5,7 @@ import { ComponentPropsWithRef, ReactElement, ReactNode } from "react";
 import classes from "./flexbox.module.css";
 
 type Display = 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex' | 'contents' | 'table';
-type justifyContentT = 'center' | 'space-between' | 'space-around' | 'space-evenly';
+type justifyContentT = 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'flex-end';
 // Props type definitions
 interface IProps extends ComponentPropsWithRef<"div"> {
     children: ReactNode;
@@ -17,7 +17,7 @@ interface IProps extends ComponentPropsWithRef<"div"> {
 export default function Box({
     children,
     display = 'block',
-    justifyContent = "center"
+    justifyContent = "flex-start"
 }: IProps): ReactElement {
     const flexJustifyContents: { [key: string]: () => string } = {
         'center': () => classes['justify-content-center'],
@@ -28,10 +28,7 @@ export default function Box({
     const justifyClass = flexJustifyContents[justifyContent]?.();
     
     return (
-        <div className={`
-            ${display === 'flex' ? classes['display-flex'] : display}
-            ${justifyClass}
-        `}>
+        <div className={`${display === 'flex' ? classes['display-flex'] : ''} ${justifyClass ?? 'flex-start'}`}>
             {children}
         </div>
     )
