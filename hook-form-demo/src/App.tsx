@@ -21,20 +21,42 @@ function App(): ReactElement {
       <Section id="general">
         <Grid>
           <Box>
-            <Label text="Doctor's Name" /> <br /> <br />
-            <Box display="flex" justifyContent="space-evenly">
+            <Box>
+              <Label text="Doctor's Name" />
+            </Box>
+            <Box display="flex">
               {/**First Name */}
               <Input
                 name="firstName"
+                placeholder="First Name"
               />
 
               {/** Last name */}
-              <Input />
+              <Input
+                placeholder="Last Name"
+              />
             </Box>
           </Box>
-          <Grid>
-            <Label text="Admission Date" />
-          </Grid>
+          <Box>
+            <Box> <Label text="Admission Date" /> </Box>
+            <Box>
+              <Input
+                type="date"
+              />
+            </Box>
+          </Box>
+        </Grid>
+
+        <Grid>
+          <Box>
+            <Box><Label text="Planned Procedure" /></Box>
+            <Input/>
+          </Box>
+
+          <Box>
+            <Box><Label text="Item Number(s)" /></Box>
+            <Input />
+          </Box>
         </Grid>
       </Section>
     </Main>
