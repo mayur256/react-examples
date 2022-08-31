@@ -3,6 +3,9 @@ import { ReactElement } from "react";
 
 // React Hook Form
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
+// Yup and React hook resolver
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from "yup";
 
 import "./App.css";
 
@@ -26,6 +29,15 @@ type Inputs = {
   itemNumber: string
 }
 
+// validation schema
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required('First Name is Required'),
+  lastName: Yup.string().required('Last Name is Required'),
+  admissionDate: Yup.string(),
+  planned: Yup.string(),
+  itemNumber: Yup.string()
+});
+
 // Component definition
 function App(): ReactElement {
   const { handleSubmit, control } = useForm<Inputs>({
@@ -35,7 +47,9 @@ function App(): ReactElement {
       admissionDate: '',
       planned: '',
       itemNumber: ''
-    }
+    },
+
+    resolver: yupResolver(validationSchema)
   });
   const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
@@ -56,8 +70,15 @@ function App(): ReactElement {
                 <Controller
                   name="firstName"
                   control={control}
-                  render={({ field }) => {
-                    return <Input {...field} placeholder="First Name" />;
+                  render={({ field, formState: { errors } }) => {
+                    return (
+                      <Box>
+                        <Input {...field} placeholder="First Name" />
+                        {errors.firstName && (
+                          <Box noMargin noPadding error>{errors.firstName?.message}</Box>
+                        )}
+                      </Box>
+                    );
                   }}
                 />
 
@@ -65,15 +86,22 @@ function App(): ReactElement {
                 <Controller
                   name="lastName"
                   control={control}
-                  render={({ field }) => {
-                    return <Input {...field} placeholder="Last Name" />;
+                  render={({ field, formState: { errors } }) => {
+                    return (
+                      <Box>
+                        <Input {...field} placeholder="Last Name" />
+                        {errors.lastName && (
+                          <Box noMargin noPadding error>{errors.lastName?.message}</Box>
+                        )}
+                      </Box>
+                    );
                   }}
                 />
               </Box>
             </Box>
             <Box>
-            <Box> <Label text="Admission Date" /> </Box>
-            <Box>
+              <Box> <Label text="Admission Date" /> </Box>
+              <Box>
                 <Controller
                   name="admissionDate"
                   control={control}
@@ -81,13 +109,13 @@ function App(): ReactElement {
                     return <Input {...field} type="date" />;
                   }}
                 />
+              </Box>
             </Box>
-          </Box>
           </Grid>
 
           <Grid>
-          <Box>
-            <Box><Label text="Planned Procedure" /></Box>
+            <Box>
+              <Box><Label text="Planned Procedure" /></Box>
               <Controller
                 name="planned"
                 control={control}
@@ -95,10 +123,10 @@ function App(): ReactElement {
                   return <Input {...field} />;
                 }}
               />
-          </Box>
+            </Box>
 
-          <Box>
-            <Box><Label text="Item Number(s)" /></Box>
+            <Box>
+              <Box><Label text="Item Number(s)" /></Box>
               <Controller
                 name="itemNumber"
                 control={control}
@@ -106,8 +134,8 @@ function App(): ReactElement {
                   return <Input {...field} />;
                 }}
               />
-          </Box>
-        </Grid>
+            </Box>
+          </Grid>
         </Section>
 
         <Box display="flex" justifyContent="flex-end">

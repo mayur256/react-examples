@@ -11,13 +11,19 @@ interface IProps extends ComponentPropsWithRef<"div"> {
     children: ReactNode;
     display?: Display;
     justifyContent?: justifyContentT;
+    noPadding?: boolean;
+    noMargin?: boolean;
+    error?: boolean;
 }
 
 // Component definition
 export default function Box({
     children,
     display = 'block',
-    justifyContent = "flex-start"
+    justifyContent = "flex-start",
+    noPadding = false,
+    noMargin = false,
+    error = false
 }: IProps): ReactElement {
     const flexJustifyContents: { [key: string]: () => string } = {
         'center': () => classes['justify-content-center'],
@@ -30,7 +36,9 @@ export default function Box({
     const justifyClass = flexJustifyContents[justifyContent]?.();
     
     return (
-        <div className={`${display === 'flex' ? classes['display-flex'] : ''} ${justifyClass ?? 'flex-start'}`}>
+        <div className=
+            {`${display === 'flex' ? classes['display-flex'] : ''} ${justifyClass ?? 'flex-start'} ${noPadding ? 'no-padding' : ''} ${noMargin ? 'no-margin' : ''} ${error ? 'text-danger' : ''}`}
+        >
             {children}
         </div>
     )
