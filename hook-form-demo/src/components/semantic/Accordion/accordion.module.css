@@ -1,0 +1,10 @@
+.summary {
+    margin: 4px;
+    padding: 12px;
+    background-color: black;
+    color: white;
+}
+
+.details {
+    margin: 12px;
+}
