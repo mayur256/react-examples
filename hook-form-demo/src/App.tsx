@@ -19,6 +19,8 @@ import Main from "./components/semantic/Main";
 import Section from "./components/semantic/Section";
 import Grid from "./components/layouts/Grid";
 import Box from "./components/layouts/Box";
+import Accordion from "./components/semantic/Accordion";
+
 
 // types alias corressponding to field names
 type Inputs = {
@@ -26,7 +28,12 @@ type Inputs = {
   lastName: string;
   admissionDate: string;
   planned: string;
-  itemNumber: string
+  itemNumber: string;
+  pFirstName: string;
+  pLastName: string;
+  dateOfBirth: string;
+  gender: string;
+  maritalStatus: string;
 }
 
 // validation schema
@@ -35,7 +42,12 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().required('Last Name is Required'),
   admissionDate: Yup.string(),
   planned: Yup.string(),
-  itemNumber: Yup.string()
+  itemNumber: Yup.string(),
+  pFirstName: Yup.string().required('First Name is Required'),
+  pLastName: Yup.string().required('Last Name is Required'),
+  dateOfBirth: Yup.string(),
+  gender: Yup.string(),
+  maritalStatus: Yup.string()
 });
 
 // Component definition
@@ -46,7 +58,12 @@ function App(): ReactElement {
       lastName: '',
       admissionDate: '',
       planned: '',
-      itemNumber: ''
+      itemNumber: '',
+      pFirstName: '',
+      pLastName: '',
+      dateOfBirth: '',
+      gender: '',
+      maritalStatus: ''
     },
 
     resolver: yupResolver(validationSchema)
@@ -136,6 +153,65 @@ function App(): ReactElement {
               />
             </Box>
           </Grid>
+        </Section>
+
+        <Section id="patient-information">
+          <Accordion title="Patient Information">
+            <Box noMargin noPadding>
+              <Grid>
+                <Box>
+                  <Box>
+                    <Label text="Doctor's Name" />
+                  </Box>
+                  <Box display="flex">
+                    {/**First Name */}
+                    <Controller
+                      name="firstName"
+                      control={control}
+                      render={({ field, formState: { errors } }) => {
+                        return (
+                          <Box>
+                            <Input {...field} placeholder="First Name" />
+                            {errors.firstName && (
+                              <Box noMargin noPadding error>{errors.firstName?.message}</Box>
+                            )}
+                          </Box>
+                        );
+                      }}
+                    />
+
+                    {/** Last name */}
+                    <Controller
+                      name="lastName"
+                      control={control}
+                      render={({ field, formState: { errors } }) => {
+                        return (
+                          <Box>
+                            <Input {...field} placeholder="Last Name" />
+                            {errors.lastName && (
+                              <Box noMargin noPadding error>{errors.lastName?.message}</Box>
+                            )}
+                          </Box>
+                        );
+                      }}
+                    />
+                  </Box>
+                </Box>
+                <Box>
+                  <Box> <Label text="Date of Birth" /> </Box>
+                  <Box>
+                    <Controller
+                      name="admissionDate"
+                      control={control}
+                      render={({ field }) => {
+                        return <Input {...field} type="date" />;
+                      }}
+                    />
+                  </Box>
+                </Box>
+              </Grid>
+            </Box>
+          </Accordion>
         </Section>
 
         <Box display="flex" justifyContent="flex-end">
