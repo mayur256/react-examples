@@ -23,7 +23,8 @@ export default function Box({
     justifyContent = "flex-start",
     noPadding = false,
     noMargin = false,
-    error = false
+    error = false,
+    ...rest
 }: IProps): ReactElement {
     const flexJustifyContents: { [key: string]: () => string } = {
         'center': () => classes['justify-content-center'],
@@ -38,6 +39,7 @@ export default function Box({
     return (
         <div className=
             {`${display === 'flex' ? classes['display-flex'] : ''} ${justifyClass ?? 'flex-start'} ${noPadding ? 'no-padding' : ''} ${noMargin ? 'no-margin' : ''} ${error ? 'text-danger' : ''}`}
+            {...rest}
         >
             {children}
         </div>

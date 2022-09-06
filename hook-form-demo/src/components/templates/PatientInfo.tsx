@@ -80,6 +80,28 @@ export const PatientInfo = ({ control }: IProps) => {
                         </Box>
                     </Grid>
                 </Box>
+
+                {/** Gender Row */}
+                <Box>
+                    <Box> <Label text="Gender" /> </Box>
+                    <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
+                        {['Male', 'Female', 'Other'].map((inputLbl) => (
+                            <Controller
+                                name="gender"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <Box>
+                                            <Input {...field} type="radio" />
+                                            <Label text={inputLbl} />
+                                        </Box>
+                                    );
+                                }}
+                            />   
+                        ))}
+                    </Box>
+                </Box>
+
             </Accordion>
         </Section>
     );
