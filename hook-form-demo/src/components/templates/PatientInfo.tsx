@@ -102,6 +102,234 @@ export const PatientInfo = ({ control }: IProps) => {
                     </Box>
                 </Box>
 
+                {/** Marital Status */}
+                <Box>
+                    <Box> <Label text="Marital Status" /> </Box>
+                    <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
+                        {['Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Other'].map((inputLbl) => (
+                            <Controller
+                                name="maritalStatus"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <Box>
+                                            <Input {...field} type="radio" />
+                                            <Label text={inputLbl} />
+                                        </Box>
+                                    );
+                                }}
+                            />
+                        ))}
+                    </Box>
+                </Box>
+
+                {/** Age validation */}
+                <Box>
+                    <Box> <Label text="The patient under the age of 18 years?" /> </Box>
+                    <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
+                        {['Yes', 'No'].map((inputLbl) => (
+                            <Controller
+                                name="gender"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <Box>
+                                            <Input {...field} type="radio" />
+                                            <Label text={inputLbl} />
+                                        </Box>
+                                    );
+                                }}
+                            />
+                        ))}
+                    </Box>
+                </Box>
+                
+                {/** Parent / Guardian Name */}
+                <Box>
+                    <Box> <Label text="Parent/Guardian Name" /> </Box>
+                    <Grid>
+                        {/**First Name */}
+                        <Controller
+                            name="pgFirstName"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="First Name" />
+                                        {errors.pgFirstName && (
+                                            <Box noMargin noPadding error>{errors.pgFirstName?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+
+                        {/** Last Name */}
+                        <Controller
+                            name="pgLastName"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="Last Name" />
+                                        {errors.pgLastName && (
+                                            <Box noMargin noPadding error>{errors.pgLastName?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+                    </Grid>
+                </Box>
+
+                {/** Employment Status */}
+                <Box>
+                    <Box> <Label text="Employment Status of patient (or parent if patient is under 18)" /> </Box>
+                    <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
+                        {['Employed', 'Unemployed', 'Retired', 'Other'].map((inputLbl) => (
+                            <Controller
+                                name="employment"
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <Box>
+                                            <Input {...field} type="radio" />
+                                            <Label text={inputLbl} />
+                                        </Box>
+                                    );
+                                }}
+                            />
+                        ))}
+                    </Box>
+                </Box>
+
+                <Grid>
+                    {/** Phone number */}
+                    <Box>
+                        <Label text="Phone Number" />
+                        <Controller
+                            name="phoneNumber"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="(000) 000-0000" />
+                                        {errors.phoneNumber && (
+                                            <Box noMargin noPadding error>{errors.phoneNumber?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+                    </Box>
+
+                    {/** Email */}
+                    <Box>
+                        <Label text="Email" />
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="a@b.com" />
+                                        {errors.email && (
+                                            <Box noMargin noPadding error>{errors.email?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+                    </Box>
+                </Grid>
+
+                <Box>
+                    <Label text="Address" />
+                    
+                    {/** Address 1 */}
+                    <Controller
+                        name="addr1"
+                        control={control}
+                        render={({ field, formState: { errors } }) => {
+                            return (
+                                <Box>
+                                    <Input {...field} placeholder="Address 1" />
+                                    {errors.addr1 && (
+                                        <Box noMargin noPadding error>{errors.addr1?.message}</Box>
+                                    )}
+                                </Box>
+                            );
+                        }}
+                    />
+
+                    {/** Address 2 */}
+                    <Controller
+                        name="addr2"
+                        control={control}
+                        render={({ field, formState: { errors } }) => {
+                            return (
+                                <Box>
+                                    <Input {...field} placeholder="Address 2" />
+                                    {errors.addr2 && (
+                                        <Box noMargin noPadding error>{errors.addr2?.message}</Box>
+                                    )}
+                                </Box>
+                            );
+                        }}
+                    />
+
+                    <Grid>
+                        {/** City */}
+                        <Controller
+                            name="city"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="City" />
+                                        {errors.city && (
+                                            <Box noMargin noPadding error>{errors.city?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+
+                        {/** State / Province */}
+                        <Controller
+                            name="state"
+                            control={control}
+                            render={({ field, formState: { errors } }) => {
+                                return (
+                                    <Box>
+                                        <Input {...field} placeholder="State / Province" />
+                                        {errors.state && (
+                                            <Box noMargin noPadding error>{errors.state?.message}</Box>
+                                        )}
+                                    </Box>
+                                );
+                            }}
+                        />
+                    </Grid>
+
+                    {/** Postal / Zipcode */}
+                    <Controller
+                        name="zipcode"
+                        control={control}
+                        render={({ field, formState: { errors } }) => {
+                            return (
+                                <Box>
+                                    <Input {...field} placeholder="Postal / Zipcode" />
+                                    {errors.state && (
+                                        <Box noMargin noPadding error>{errors.zipcode?.message}</Box>
+                                    )}
+                                </Box>
+                            );
+                        }}
+                    />
+
+                </Box>
+
             </Accordion>
         </Section>
     );

@@ -34,7 +34,18 @@ const validationSchema = Yup.object().shape({
   pLastName: Yup.string().required('Last Name is Required'),
   dateOfBirth: Yup.string(),
   gender: Yup.string(),
-  maritalStatus: Yup.string()
+  maritalStatus: Yup.string(),
+  ageValidation: Yup.string(),
+  pgFirstName: Yup.string(),
+  pgLastName: Yup.string(),
+  employment: Yup.string(),
+  phoneNumber: Yup.number().typeError('Value should be a number'),
+  email: Yup.string().email('Invalid email'),
+  addr1: Yup.string(),
+  addr2: Yup.string(),
+  city: Yup.string(),
+  state: Yup.string(),
+  zipcode: Yup.string()
 });
 
 // Component definition
@@ -50,7 +61,18 @@ function App(): ReactElement {
       pLastName: '',
       dateOfBirth: '',
       gender: '',
-      maritalStatus: ''
+      maritalStatus: '',
+      ageValidation: '',
+      pgFirstName: '',
+      pgLastName: '',
+      employment: '',
+      phoneNumber: '',
+      email: '',
+      addr1: '',
+      addr2: '',
+      city: '',
+      state: '',
+      zipcode: ''
     },
 
     resolver: yupResolver(validationSchema)
