@@ -21,4 +21,5 @@ export type Inputs = {
     city: string,
     state: string,
     zipcode: string,
+    contactPreference: Array<string>
 }

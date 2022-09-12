@@ -45,7 +45,8 @@ const validationSchema = Yup.object().shape({
   addr2: Yup.string(),
   city: Yup.string(),
   state: Yup.string(),
-  zipcode: Yup.string()
+  zipcode: Yup.string(),
+  contactPreference: Yup.array().of(Yup.string()).nullable()
 });
 
 // Component definition
@@ -72,7 +73,8 @@ function App(): ReactElement {
       addr2: '',
       city: '',
       state: '',
-      zipcode: ''
+      zipcode: '',
+      contactPreference: []
     },
 
     resolver: yupResolver(validationSchema)

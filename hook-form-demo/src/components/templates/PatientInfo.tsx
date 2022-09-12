@@ -87,6 +87,7 @@ export const PatientInfo = ({ control }: IProps) => {
                     <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
                         {['Male', 'Female', 'Other'].map((inputLbl) => (
                             <Controller
+                                key={inputLbl}
                                 name="gender"
                                 control={control}
                                 render={({ field }) => {
@@ -108,6 +109,7 @@ export const PatientInfo = ({ control }: IProps) => {
                     <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
                         {['Single', 'Married', 'Divorced', 'Widowed', 'Separated', 'Other'].map((inputLbl) => (
                             <Controller
+                                key={inputLbl}
                                 name="maritalStatus"
                                 control={control}
                                 render={({ field }) => {
@@ -129,6 +131,7 @@ export const PatientInfo = ({ control }: IProps) => {
                     <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
                         {['Yes', 'No'].map((inputLbl) => (
                             <Controller
+                                key={inputLbl}
                                 name="gender"
                                 control={control}
                                 render={({ field }) => {
@@ -188,6 +191,7 @@ export const PatientInfo = ({ control }: IProps) => {
                     <Box display="flex" justifyContent="space-between" style={{ width: '70%' }}>
                         {['Employed', 'Unemployed', 'Retired', 'Other'].map((inputLbl) => (
                             <Controller
+                                key={inputLbl}
                                 name="employment"
                                 control={control}
                                 render={({ field }) => {
@@ -329,7 +333,27 @@ export const PatientInfo = ({ control }: IProps) => {
                     />
 
                 </Box>
-
+                
+                <Box>
+                    <Label text="Which one(s) do you prefer to be contacted by?" />
+                    <Grid>
+                        {["Phone", "Email", "Post", "SMS", "Other"].map((inputLbl) => (
+                            <Controller
+                                name="contactPreference"
+                                key={inputLbl}
+                                control={control}
+                                render={({ field }) => {
+                                    return (
+                                        <Box>
+                                            <input type="checkbox" {...field} />
+                                            <Label text={inputLbl} />
+                                        </Box>
+                                    );
+                                }}
+                            />
+                        ))}
+                    </Grid>
+                </Box>
             </Accordion>
         </Section>
     );
