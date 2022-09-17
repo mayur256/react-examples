@@ -51,7 +51,7 @@ const validationSchema = Yup.object().shape({
 
 // Component definition
 function App(): ReactElement {
-  const { handleSubmit, control } = useForm<Inputs>({
+  const { handleSubmit, control, setValue } = useForm<Inputs>({
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -89,7 +89,10 @@ function App(): ReactElement {
       <form onSubmit={handleSubmit(onSubmit)}>
         <General control={control} />
 
-        <PatientInfo control={control}/>
+        <PatientInfo
+          control={control}
+          setValue={setValue}
+        />
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit">Submit</Button>

@@ -9,7 +9,7 @@ interface InputProps extends ComponentPropsWithRef<"input"> {
     type: string;
     name: string;
     id: string;
-    value: string;
+    value: string | Array<string>;
     onChange: (e: React.FormEvent<HTMLInputElement>) => void;
     className: string;
     placeholder: string;
