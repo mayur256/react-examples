@@ -1,6 +1,8 @@
 // Top level  imports
+import { FormEvent } from "react";
+
 // React Hook Form
-import { Controller, Control } from "react-hook-form";
+import { Controller, Control, UseFormSetValue } from "react-hook-form";
 
 // Atoms / Molecules / Organisms
 import Label from "../atoms/Label";
@@ -18,10 +20,11 @@ import { Inputs } from "../types";
 // Props type definitions
 interface IProps {
     control: Control<Inputs>;
+    setValue: UseFormSetValue<Inputs>
 }
 
 // Component definition
-export const PatientInfo = ({ control }: IProps) => {
+export const PatientInfo = ({ control, setValue }: IProps) => {
     // Main JSX
     return (
         <Section id="patient-information">
@@ -343,9 +346,26 @@ export const PatientInfo = ({ control }: IProps) => {
                                 key={inputLbl}
                                 control={control}
                                 render={({ field }) => {
+                                    const handleChange = (event: FormEvent<HTMLInputElement>) => {
+                                        const targetEl = event.target as HTMLInputElement;
+                                        const { checked, value } = targetEl;
+                                        let contactValues = field.value;
+                                        if (checked) {
+                                            contactValues = [...new Set([...field.value, value])];
+                                            setValue('contactPreference', contactValues);
+                                        } else {
+                                            contactValues = contactValues.filter((val: string): boolean => val !== value);
+                                        }
+                                    }
+
                                     return (
                                         <Box>
-                                            <input type="checkbox" {...field} />
+                                            <Input
+                                                {...field}
+                                                type="checkbox"
+                                                value={inputLbl.toLowerCase()}
+                                                onChange={handleChange}
+                                            />
                                             <Label text={inputLbl} />
                                         </Box>
                                     );
