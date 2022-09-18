@@ -96,7 +96,7 @@ export const PatientInfo = ({ control, setValue }: IProps) => {
                                 render={({ field }) => {
                                     return (
                                         <Box>
-                                            <Input {...field} type="radio" />
+                                            <Input {...field} type="radio" value={inputLbl.toLowerCase()} />
                                             <Label text={inputLbl} />
                                         </Box>
                                     );
@@ -118,7 +118,7 @@ export const PatientInfo = ({ control, setValue }: IProps) => {
                                 render={({ field }) => {
                                     return (
                                         <Box>
-                                            <Input {...field} type="radio" />
+                                            <Input {...field} type="radio" value={inputLbl.toLowerCase()} />
                                             <Label text={inputLbl} />
                                         </Box>
                                     );
@@ -135,12 +135,12 @@ export const PatientInfo = ({ control, setValue }: IProps) => {
                         {['Yes', 'No'].map((inputLbl) => (
                             <Controller
                                 key={inputLbl}
-                                name="gender"
+                                name="ageValidation"
                                 control={control}
                                 render={({ field }) => {
                                     return (
                                         <Box>
-                                            <Input {...field} type="radio" />
+                                            <Input {...field} type="radio" value={inputLbl.toLowerCase()} />
                                             <Label text={inputLbl} />
                                         </Box>
                                     );
@@ -200,7 +200,7 @@ export const PatientInfo = ({ control, setValue }: IProps) => {
                                 render={({ field }) => {
                                     return (
                                         <Box>
-                                            <Input {...field} type="radio" />
+                                            <Input {...field} type="radio" value={inputLbl.toLowerCase()} />
                                             <Label text={inputLbl} />
                                         </Box>
                                     );
