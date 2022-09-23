@@ -1,0 +1,22 @@
+form {
+    margin: 0 25%;
+    h1 {
+        text-align: center;
+    }
+    .rowField {
+        input, button {
+            padding: 0.5rem 0.7rem;
+            margin: 0.5rem;
+            width: 100%;
+        }
+
+        button {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        input::placeholder {
+            color: dodgerblue;
+        }
+    }
+}
