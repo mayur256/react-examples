@@ -1,4 +1,4 @@
-form {
+.loginPage {
     margin: 0 25%;
     h1 {
         text-align: center;
@@ -17,6 +17,21 @@ form {
 
         input::placeholder {
             color: dodgerblue;
+        }
+    }
+
+    .userDetails {
+        margin-top: 5%;
+        text-transform: capitalize;
+        table {
+            margin-left:8px;
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid;
+        }
+        tr, td {
+            border: 1px solid;
+            padding: 8px;
         }
     }
 }
