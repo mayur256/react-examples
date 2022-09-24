@@ -7,6 +7,12 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+if (process.env.NODE_ENV === 'development') {
+  const worker  = require('./mocks/setup');
+  worker.server.start();
+}
+
 root.render(
   <React.StrictMode>
     <App />
