@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 
 if (process.env.NODE_ENV === 'development') {
-  const worker  = require('./mocks/setup');
+  const worker  = require('./mocks/browser');
   worker.server.start();
 }
 

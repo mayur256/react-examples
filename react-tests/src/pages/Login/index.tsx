@@ -43,25 +43,42 @@ export default function Login(): ReactElement {
     // Main JSX
     return (
         <div className="loginPage">
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit} data-testid="login-form">
                 <h1>Welcome</h1>
 
                 <div className="rowField">
-                    <input type="text" name="email" placeholder="Email" required />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        data-testid="email"
+                    />
                 </div>
 
                 <div className="rowField">
-                    <input type="text" name="password" placeholder="Password" required />
+                    <input
+                        type="text"
+                        name="password"
+                        placeholder="Password"
+                        data-testid="password"
+                        required
+                    />
                 </div>
 
                 <div className="rowField">
-                    <button type="submit">Submit</button>
+                    <button
+                        data-testid="submit-btn"
+                        type="submit"
+                    >
+                        Submit
+                    </button>
                 </div>
             </form>
 
             {/** User details */}
             {authUser && (
-                <div className="userDetails">
+                <div className="userDetails" data-testid="user-details">
                     <h1>User Details</h1>
                     <table cellSpacing={20}>
                         <tbody>
