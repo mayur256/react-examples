@@ -84,15 +84,15 @@ export default function Login(): ReactElement {
                         <tbody>
                             <tr>
                                 <td>ID</td>
-                                <td>{authUser?._id ?? 'user id'}</td>
+                                <td data-testid="user-id">{authUser?._id}</td>
                             </tr>
                             <tr>
                                 <td>Name</td>
-                                <td>{authUser?.name ?? 'name'}</td>
+                                <td data-testid="user-name">{authUser?.name}</td>
                             </tr>
                             <tr>
                                 <td>Email / Username</td>
-                                <td>{authUser?.userName ?? 'user name / email'}</td>
+                                <td data-testid="user-email">{authUser?.userName}</td>
                             </tr>
                         </tbody>
                     </table>

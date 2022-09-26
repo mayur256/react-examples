@@ -7,6 +7,9 @@ import { server } from "../../mocks/tests";
 // Subject  component
 import Login from "./index";
 
+// Mock data
+import { loginPayload as loginResponse } from "../../mocks/http-payload";
+
 // Test lifecycle hooks
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
@@ -39,7 +42,7 @@ describe('Login Component tests', (): void => {
     });
 
     // Test case - 2
-    test('API returns with expected component', async (): Promise<void> => {
+    test('API returns with expected response', async (): Promise<void> => {
         // Arrange
         // render the component in jest environment
         render(<Login />);
@@ -60,6 +63,11 @@ describe('Login Component tests', (): void => {
 
         await waitFor((): void => {
             expect(screen.getByTestId('user-details')).toBeInTheDocument();
-        })
+        });
+
+        // Check whether api returns correct response
+        await waitFor((): void => expect(screen.getByTestId('user-id').innerHTML).toBe(loginResponse._id));
+        await waitFor((): void => expect(screen.getByTestId('user-name').innerHTML).toBe(loginResponse.name));
+        await waitFor((): void => expect(screen.getByTestId('user-email').innerHTML).toBe(loginResponse.userName));
     });
 });
