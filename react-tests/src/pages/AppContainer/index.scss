@@ -1,0 +1,10 @@
+.app-container{
+    height: calc(100vh - 45px);
+    background-color: aqua;
+
+    h1 {
+        margin-inline-start: 5em;
+        text-align: left;
+        color: dodgerblue;
+    }
+}
