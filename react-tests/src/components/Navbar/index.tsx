@@ -9,9 +9,9 @@ import "./index.scss";
 // Component definition
 export default function Navbar(): ReactElement {
     return (
-        <nav>
-            <Link to="/app">Home</Link>
-            <Link to="contact">Contact</Link>
+        <nav data-testid="navbar">
+            <Link to="/app" data-testid="navlinks">Home</Link>
+            <Link to="contact" data-testid="navlinks">Contact</Link>
         </nav>
     );
 };
