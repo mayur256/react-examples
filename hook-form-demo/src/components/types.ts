@@ -21,5 +21,15 @@ export type Inputs = {
     city: string,
     state: string,
     zipcode: string,
-    contactPreference: Array<string>
+    contactPreference: Array<string>,
+    kinFirstName: string;
+    kinLastName: string;
+    relationToPatient: string;
+    kinEmail: string;
+    kinNumber: string;
+    kinAddr1: string;
+    kinAddr2: string;
+    kinCity: string;
+    kinProvince: string;
+    kinZipcode: string;
 }

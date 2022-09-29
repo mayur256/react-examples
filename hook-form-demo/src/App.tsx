@@ -22,6 +22,7 @@ import { PatientInfo } from "./components/templates/PatientInfo";
 
 // Types
 import { Inputs } from "./components/types";
+import ContactPerson from "./components/templates/ContactPerson";
 
 // validation schema
 const validationSchema = Yup.object().shape({
@@ -74,7 +75,17 @@ function App(): ReactElement {
       city: '',
       state: '',
       zipcode: '',
-      contactPreference: []
+      contactPreference: [],
+      kinFirstName: '',
+      kinLastName: '',
+      relationToPatient: '',
+      kinEmail: '',
+      kinNumber: '',
+      kinAddr1: '',
+      kinAddr2: '',
+      kinCity: '',
+      kinProvince: '',
+      kinZipcode: '',
     },
 
     resolver: yupResolver(validationSchema)
@@ -93,6 +104,8 @@ function App(): ReactElement {
           control={control}
           setValue={setValue}
         />
+
+        <ContactPerson control={control} />
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit">Submit</Button>
