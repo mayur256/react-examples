@@ -1,5 +1,5 @@
 // Top level  imports
-import { FormEvent } from "react";
+import { FormEvent, ReactElement } from "react";
 
 // React Hook Form
 import { Controller, Control, UseFormSetValue } from "react-hook-form";
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 // Component definition
-export const PatientInfo = ({ control, setValue }: IProps) => {
+export const PatientInfo = ({ control, setValue }: IProps): ReactElement => {
     // Main JSX
     return (
         <Section id="patient-information">
