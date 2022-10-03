@@ -23,6 +23,7 @@ import { PatientInfo } from "./components/templates/PatientInfo";
 // Types
 import { Inputs } from "./components/types";
 import ContactPerson from "./components/templates/ContactPerson";
+import Agreement from "./components/templates/Agreement";
 
 // validation schema
 const validationSchema = Yup.object().shape({
@@ -86,6 +87,8 @@ function App(): ReactElement {
       kinCity: '',
       kinProvince: '',
       kinZipcode: '',
+      agreeTerms: false,
+      agreementDate: ''
     },
 
     resolver: yupResolver(validationSchema)
@@ -106,6 +109,11 @@ function App(): ReactElement {
         />
 
         <ContactPerson control={control} />
+
+        <Agreement
+          control={control}
+          setValue={setValue}
+        />
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit">Submit</Button>

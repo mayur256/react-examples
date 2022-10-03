@@ -32,4 +32,6 @@ export type Inputs = {
     kinCity: string;
     kinProvince: string;
     kinZipcode: string;
+    agreeTerms: boolean;
+    agreementDate: string;
 }
