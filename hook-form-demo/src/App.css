@@ -42,3 +42,7 @@ main h1 {
 .text-danger {
     color: tomato;
 }
+
+.sigCanvas{
+    border: 1px solid;
+}

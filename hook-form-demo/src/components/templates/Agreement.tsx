@@ -1,6 +1,9 @@
 // Top level imports
 import { ReactElement } from "react";
 
+// Signature Canvas
+import SignatureCanvas from "react-signature-canvas";
+
 // React Hook Form
 import { Controller, Control, UseFormSetValue } from "react-hook-form";
 
@@ -62,6 +65,16 @@ export default function Agreement({ control, setValue }: IProps): ReactElement {
                             />
                         </Box>
                     </Grid>
+                </Box>
+
+                <Box>
+                    <SignatureCanvas
+                        canvasProps={{
+                            width: 500,
+                            height: 200,
+                            className: 'sigCanvas'
+                        }}
+                    />
                 </Box>
             </Accordion> 
         </Section>
