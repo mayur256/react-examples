@@ -1,5 +1,5 @@
 // Top level imports
-import { ReactElement } from "react";
+import { ReactElement, useRef } from "react";
 
 // Signature Canvas
 import SignatureCanvas from "react-signature-canvas";
@@ -19,6 +19,7 @@ import Box from "../layouts/Box";
 
 // global type definitions
 import { Inputs } from "../types";
+import Button from "../atoms/Button";
 
 // Props type definitions
 interface IProps {
@@ -28,6 +29,22 @@ interface IProps {
 
 // Component definition
 export default function Agreement({ control, setValue }: IProps): ReactElement {
+    const signatureRef = useRef(null);
+
+    const getSignatureData = (): string => {
+        if (signatureRef.current) {
+            const signatureEl = signatureRef.current as HTMLCanvasElement;
+            return signatureEl.toDataURL();
+        }
+        return '';
+    }
+
+    const clearSignature = () => {
+        if (signatureRef.current) {
+            const signatureEl = signatureRef.current as any;
+            signatureEl?.clear();
+        }
+    }
     return (
         <Section id="agreement">
             <Accordion title="Agreement">
@@ -68,13 +85,24 @@ export default function Agreement({ control, setValue }: IProps): ReactElement {
                 </Box>
 
                 <Box>
-                    <SignatureCanvas
-                        canvasProps={{
-                            width: 500,
-                            height: 200,
-                            className: 'sigCanvas'
+                    <Controller
+                        name="signature"
+                        control={control}
+                        render={({ field }) => {
+                            return (
+                                <SignatureCanvas
+                                    ref={signatureRef}
+                                    canvasProps={{
+                                        width: 500,
+                                        height: 200,
+                                        className: 'sigCanvas'
+                                    }}
+                                    onEnd={() => setValue('signature', getSignatureData())}
+                                />
+                            )
                         }}
                     />
+                    &nbsp;<Button type="button" onClick={clearSignature}>Clear</Button>
                 </Box>
             </Accordion> 
         </Section>

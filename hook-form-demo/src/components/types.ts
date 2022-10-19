@@ -34,4 +34,5 @@ export type Inputs = {
     kinZipcode: string;
     agreeTerms: boolean;
     agreementDate: string;
+    signature: string;
 }

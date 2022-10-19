@@ -48,7 +48,23 @@ const validationSchema = Yup.object().shape({
   city: Yup.string(),
   state: Yup.string(),
   zipcode: Yup.string(),
-  contactPreference: Yup.array().of(Yup.string()).nullable()
+  contactPreference: Yup.array().of(Yup.string()).nullable(),
+  kinFirstName: Yup.string(),
+  kinLastName: Yup.string(),
+  relationToPatient: Yup.string(),
+  kinEmail: Yup.string(),
+  kinNumber: Yup.string(),
+  kinAddr1: Yup.string(),
+  kinAddr2: Yup.string(),
+  kinCity: Yup.string(),
+  kinProvince: Yup.string(),
+  kinZipcode: Yup.string(),
+  agreeTerms: Yup.string(),
+  agreementDate: Yup.string(),
+  signature: Yup.string()
+    .matches(/^data:image\/(?:gif|png|jpeg|bmp|webp|svg\+xml)(?:;charset=utf-8)?;base64,(?:[A-Za-z0-9]|[+/])+={0,2}/,
+      "Signature must be png"
+    )
 });
 
 // Component definition
@@ -88,7 +104,8 @@ function App(): ReactElement {
       kinProvince: '',
       kinZipcode: '',
       agreeTerms: false,
-      agreementDate: ''
+      agreementDate: '',
+      signature: ''
     },
 
     resolver: yupResolver(validationSchema)
