@@ -1,15 +1,33 @@
 import Task from './Task';
+import { useDispatch, useSelector } from 'react-redux';
+import { UPDATE_TASK_STATE } from '../lib/store';
+
 import PropTypes from "prop-types";
 
-export default function TaskList({
-    loading,
-    tasks,
-    onPinTask,
-    onArchiveTask
-}) {
-    const events = {
-        onPinTask,
-        onArchiveTask,
+export default function TaskList() {
+    // We're retrieving our state from the store
+    const tasks = useSelector((state) => {
+        const tasksInOrder = [
+            ...state.taskbox.tasks.filter((t) => t.state === 'TASK_PINNED'),
+            ...state.taskbox.tasks.filter((t) => t.state !== 'TASK_PINNED'),
+        ];
+        const filteredTasks = tasksInOrder.filter(
+            (t) => t.state === 'TASK_INBOX' || t.state === 'TASK_PINNED'
+        );
+        return filteredTasks;
+    });
+    const { status } = useSelector((state) => state.taskbox);
+
+    const dispatch = useDispatch();
+
+    const pinTask = (value) => {
+        // We're dispatching the Pinned event back to our store
+        dispatch(UPDATE_TASK_STATE({ id: value, newTaskState: 'TASK_PINNED' }));
+    };
+
+    const archiveTask = (value) => {
+        // We're dispatching the Archive event back to our store
+        dispatch(UPDATE_TASK_STATE({ id: value, newTaskState: 'TASK_ARCHIVED' }));
     };
 
     const LoadingRow = (
@@ -21,7 +39,7 @@ export default function TaskList({
         </div>
     );
 
-    if (loading) {
+    if (status === 'loading') {
         return (
             <div className="list-items" data-testid="loading" key={"loading"}>
                 {LoadingRow}
@@ -54,7 +72,12 @@ export default function TaskList({
     return (
         <div className="list-items">
             {tasksInOrder.map(task => (
-                <Task key={task.id} task={task} {...events} />
+                <Task
+                    key={task.id}
+                    task={task}
+                    onPinTask={(task) => pinTask(task)}
+                    onArchiveTask={(task) => archiveTask(task)}
+                />
             ))}
         </div>
     );
