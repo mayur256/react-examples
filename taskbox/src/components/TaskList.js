@@ -2,11 +2,12 @@ import Task from './Task';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_TASK_STATE } from '../lib/store';
 
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 export default function TaskList() {
     // We're retrieving our state from the store
     const tasks = useSelector((state) => {
+        console.log(state);
         const tasksInOrder = [
             ...state.taskbox.tasks.filter((t) => t.state === 'TASK_PINNED'),
             ...state.taskbox.tasks.filter((t) => t.state !== 'TASK_PINNED'),
@@ -83,12 +84,12 @@ export default function TaskList() {
     );
 }
 
-TaskList.propTypes = {
-    task: PropTypes.arrayOf(PropTypes.shape({
+/*TaskList.propTypes = {
+    tasks: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         state: PropTypes.string.isRequired
     })),
     onArchiveTask: PropTypes.func,
     onPinTask: PropTypes.func
-}
+}*/
