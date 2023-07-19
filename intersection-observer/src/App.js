@@ -17,44 +17,49 @@ export default function App() {
         {
             name: "mercury",
             colourText: "Dark Gray",
-            colourHex: "",
+            colourHex: "#736f66",
             image: Mercury,
         },
         {
             name: "venus",
             colourText: "Pearly White",
-            colourHex: "",
+            colourHex: "#c38736",
             image: Venus,
         },
-        { name: "earth", colourText: "Blue", colourHex: "", image: Earth },
+        {
+            name: "earth",
+            colourText: "Blue",
+            colourHex: "#495391",
+            image: Earth,
+        },
         {
             name: "mars",
             colourText: "Brown-Red",
-            colourHex: "",
+            colourHex: "#623a32",
             image: Mars,
         },
         {
             name: "jupiter",
             colourText: "Brown, Orange, Red, White",
-            colourHex: "",
+            colourHex: "#b8ba7f",
             image: Jupiter,
         },
         {
             name: "saturn",
             colourText: "hazy yellow-brown",
-            colourHex: "",
+            colourHex: "#8f7962",
             image: Saturn,
         },
         {
             name: "uranus",
             colourText: "Blue-Green",
-            colourHex: "",
+            colourHex: "#3db0c6",
             image: Uranus,
         },
         {
             name: "neptune",
             colourText: "bright azure blue",
-            colourHex: "",
+            colourHex: "#4675fe",
             image: Neptune,
         },
     ];
@@ -62,10 +67,11 @@ export default function App() {
     // main renderer
     return (
         <>
-            <h1>Solar System</h1>
-            {planets.map(({ name, image }) => (
-                <section key={name} className="planet">
+            <h1 style={{ textAlign: 'center' }}>Solar System</h1>
+            {planets.map(({ name, image, colourHex }) => (
+                <section key={name} className="planet" style={{ backgroundColor: colourHex }}>
                     <div className="image-container">
+                        <img alt={name} src={image} className="hide-bg"  />
                     </div>
                 </section>
             ))}

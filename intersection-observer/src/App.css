@@ -11,6 +11,42 @@ section.planet {
 }
 
 .image-container {
-    min-height: 100px;
-    background-color: red;
+    min-height: 80vh;
+    min-width: 80vh;
+    max-height: 80vh;
+    max-width: 80vh;
+    background-color: white;
+}
+
+.image-container > img {
+    height: 100%;
+    max-width: 100%;
+}
+
+.hide-bg{
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+}
+
+/** CSS for specific device screens */
+/** Tablet Screen */
+@media only screen and (min-width: 576px) {
+    .image-container {
+        min-height: 80vh;
+        min-width: 45vh;
+        max-height: 80vh;
+        max-width: 45vh;
+        background-color: white;
+    }
+}
+
+/** Desktop Screens */
+@media only screen and (min-width: 768px) {
+    .image-container {
+        min-height: 80vh;
+        min-width: 80vh;
+        max-height: 80vh;
+        max-width: 80vh;
+        background-color: white;
+    }
 }
