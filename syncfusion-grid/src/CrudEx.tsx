@@ -8,7 +8,7 @@ function App() {
     let grid: Grid | null;
     let data: any;
     const toolbarOptions: any = ['Add', 'Edit', 'Delete', 'Update', 'Cancel'];
-    const editSettings: any = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch' };
+    const editSettings: any = { allowEditing: true, allowAdding: true, allowDeleting: true };
     const pageSettings: PageSettingsModel = { pageSize: 10 };
     const renderComplete = () => {
         if (grid && (grid.dataSource instanceof Array
@@ -28,6 +28,7 @@ function App() {
     const dataSourceChanged = (state: DataSourceChangedEventArgs): void => {
         console.log({ dataSourceChanged: state })
         if (state.action === 'add') {
+            state.endEdit?.()
             // orderService.addRecord(state).then(() => state.endEdit?.());
         } else if (state.action === 'edit') {
             // orderService.updateRecord(state).then(() => state.endEdit?.());

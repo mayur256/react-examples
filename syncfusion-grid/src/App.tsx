@@ -5,7 +5,7 @@ import CrudEx from "./CrudEx"
 export default function App() {
     return (
         <>
-            <CrudEx />
+            <CrudWithState />
         </>
     )
 }
