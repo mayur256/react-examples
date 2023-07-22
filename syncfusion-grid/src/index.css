@@ -1,0 +1,34 @@
+/** BootStrap base CSS */ 
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/** Syncfusion grids */
+@import '@syncfusion/ej2-base/styles/bootstrap.css';  
+@import '@syncfusion/ej2-buttons/styles/bootstrap.css';  
+@import '@syncfusion/ej2-calendars/styles/bootstrap.css';  
+@import '@syncfusion/ej2-dropdowns/styles/bootstrap.css';  
+@import '@syncfusion/ej2-inputs/styles/bootstrap.css';  
+@import '@syncfusion/ej2-navigations/styles/bootstrap.css';
+@import '@syncfusion/ej2-popups/styles/bootstrap.css';
+@import '@syncfusion/ej2-splitbuttons/styles/bootstrap.css';
+@import '@syncfusion/ej2-notifications/styles/bootstrap.css';
+@import "@syncfusion/ej2-react-grids/styles/bootstrap.css";
+
+/** Syncfusion buttons */
+@import "@syncfusion/ej2-base/styles/bootstrap.css";
+@import "@syncfusion/ej2-buttons/styles/bootstrap.css";
+
+/** Icons */
+@import "@syncfusion/ej2-icons/styles/bootstrap.css";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
