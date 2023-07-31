@@ -11,3 +11,15 @@
   - A target element intersects either the device's viewport or a specified element. That specified element is called the root element or root for the purposes of the Intersection Observer API.
   - The first time the observer is initially asked to watch a target element.
 - Typically, you'll want to watch for intersection changes with regard to the target element's closest **scrollable ancestor**, or, if the target element isn't a descendant of a scrollable element, the device's viewport. To watch for intersection relative to the device's **viewport**, specify _null_ for **root** option.
+
+# Example
+```
+// configuration
+const options = {
+  root: document.querySelector("#scrollArea"),
+  rootMargin: "0px",
+  threshold: 1.0,
+};
+// Instantiation
+const observer = new IntersectionObserver(callback, options);
+```
