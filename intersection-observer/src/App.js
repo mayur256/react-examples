@@ -73,6 +73,7 @@ export default function App() {
             if (entry.isIntersecting) {
                 const planet = entry.target.dataset.planetName;
                 console.log(`Intersected planet : ${planet}`);
+                handlePlanetIntersection(planet)
             }
         }
     }
@@ -84,6 +85,7 @@ export default function App() {
         threshold: 0.6
     };
 
+    // onComponentDidMount
     useEffect(() => {
         const observer = new IntersectionObserver(obsCallback, opt);
         const targetElms = document.querySelectorAll('.planet');
@@ -100,6 +102,12 @@ export default function App() {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const handlePlanetIntersection = (planet) => {
+        const planetColor = planets.find(({ name }) => name === planet)?.colourHex ?? '#fff';
+        window.alert(`Welcome to ${planet}`);
+        document.body.style.backgroundColor = planetColor;
+    }
 
     // main renderer
     return (
