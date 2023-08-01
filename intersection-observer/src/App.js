@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 // Static images
 import Mercury from "./assets/images/mercury.jpg";
 import Venus from "./assets/images/venus.jpg";
@@ -13,6 +15,7 @@ import "./App.css";
 
 // Component definition
 export default function App() {
+    // list of planets
     const planets = [
         {
             name: "mercury",
@@ -64,12 +67,46 @@ export default function App() {
         },
     ];
 
+    // intersection observer callback
+    const obsCallback = (entries) => {
+        for (const entry of entries) {
+            if (entry.isIntersecting) {
+                const planet = entry.target.dataset.planetName;
+                console.log(`Intersected planet : ${planet}`);
+            }
+        }
+    }
+
+    // configuration object for observer
+    const opt = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(obsCallback, opt);
+        const targetElms = document.querySelectorAll('.planet');
+        
+        // observe elements
+        for (const el of targetElms) {
+            observer.observe(el);
+        }
+
+        return () => {
+            for (const el of targetElms) {
+                observer.unobserve(el);
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     // main renderer
     return (
         <>
             <h1 style={{ textAlign: 'center' }}>Solar System</h1>
-            {planets.map(({ name, image, colourHex }) => (
-                <section key={name} className="planet" style={{ backgroundColor: colourHex }}>
+            {planets.map(({ name, image }) => (
+                <section key={name} className="planet" data-planet-name={name}>
                     <div className="image-container">
                         <img alt={name} src={image} className="hide-bg"  />
                     </div>
