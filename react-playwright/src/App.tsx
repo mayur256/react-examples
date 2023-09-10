@@ -2,9 +2,12 @@ import { ReactElement } from 'react'
 import './App.css'
 
 function App(): ReactElement {
-
     return (
-        <h1>Hello World</h1>
+        <form>
+            <input id="nameInput" />
+            
+            <button type="submit" id="submit-btn">Submit</button>
+        </form>
     )
 }
 
