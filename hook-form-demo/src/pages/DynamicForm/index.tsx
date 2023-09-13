@@ -1,5 +1,5 @@
 // Top level imports
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useRef } from "react";
 
 // RHK
 // React Hook Form
@@ -22,20 +22,41 @@ type FormValues = {
 // Component definition
 export default function DynamicForm(): ReactElement {
     // hooks
-    const { control, handleSubmit, formState: { errors } } = useForm<FormValues>({
+    const { control, handleSubmit, formState, getValues } = useForm<FormValues>({
         defaultValues: {
-            user: [{ firstName: 'John', lastName: 'Doe' }]
-        }
+            user: [{ firstName: '', lastName: 'Doe' }]
+        },
+        mode: 'onChange'
     });
-
+    const { errors } = formState;
     const { fields, append, remove } = useFieldArray({
         name: 'user',
         control
-    })
-    
+    });
+
+    // Refs
+    const formRef = useRef<HTMLFormElement | null>(null);
+
+    // lifecycle hooks
+    useEffect(() => {
+        console.log(formState);
+    }, [formState])
+
+    const onFormSubmitted = (data: FormValues) => {
+        console.log(data);
+        append({ firstName: '', lastName: '' });
+    }
+
+    const addFieldClicked = () => {
+        formRef.current?.dispatchEvent(new Event("submit", { cancelable: true }))
+    }
+
     // main renderer
     return (
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form
+            onSubmit={handleSubmit(onFormSubmitted)}
+            ref={formRef}
+        >
             {fields.map((field, index) => (
                 <div className={styles["form-row"]} key={field.id}>
                     <div>
@@ -62,13 +83,14 @@ export default function DynamicForm(): ReactElement {
                         <Button onClick={() => remove(index)}>Delete</Button>
 
                         {index === fields.length - 1 && (
-                            <Button onClick={() => append({ firstName: '', lastName: '' })}>Add</Button>
+                            <Button onClick={addFieldClicked}>Add</Button>
                         )}
                     </div>
                 </div>
             ))}
 
-            <Button type="submit">Submit</Button>
+            <Button type="button" onClick={() => console.log(getValues(), formState)}>Test Form values</Button>
         </form>
+        
     )
 }
