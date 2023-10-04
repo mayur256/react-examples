@@ -82,7 +82,7 @@ export default function App() {
     const opt = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.6
+        threshold: 0.8
     };
 
     // onComponentDidMount
