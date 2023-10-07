@@ -1,12 +1,33 @@
+'use client'
+
 // top level imports
 import { ReactElement } from "react";
-import Link from 'next/link'
+import Link from 'next/link';
+import { usePathname } from "next/navigation";
 
+// Component definition
 export function AppLinks(): ReactElement {
+    // Constants
+    const routes: Array<{ key: string, label: string }> = [
+        { key: '/', label: 'Home' },
+        { key: '/about', label: 'About' },
+        { key: '/portal', label: 'Portal' }
+    ];
+    const activeClass = "bg-blue-400 text-white";
+
+    // hooks
+    const pathname = usePathname();
+
+    // main renderer
     return (
         <ol>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about">About</Link></li>
+            {routes.map(({ key, label }) => (
+                <Link href={key} key={key}>
+                    <li className={`text-center p-2 rounded ${pathname === key ? activeClass : ''}`}>
+                        {label}
+                    </li>
+                </Link>
+            ))}
         </ol>
     )
 }
