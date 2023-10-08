@@ -10,7 +10,6 @@ export function AppLinks(): ReactElement {
     // Constants
     const routes: Array<{ key: string, label: string }> = [
         { key: '/', label: 'Home' },
-        { key: '/about', label: 'About' },
         { key: '/portal', label: 'Portal' }
     ];
     const activeClass = "bg-blue-400 text-white";

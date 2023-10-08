@@ -6,9 +6,9 @@ export default function Home() {
 
             <div className="mt-4">
                 <p>
-                    This project is a humble attempt at exploring react concepts are are prevalent.
+                    This project is a humble attempt at exploring react concepts that are prevalent.
                     I will be documenting all the concepts that I come across throughout my endeavour with proper examples.
-                    I also be discussing the throeritical aspects of the concepts along the way that you would wanna look out for.
+                    I will also be discussing the throeritical aspects of the concepts along the way that you would wanna look out for.
                 </p>
 
                 <p>
