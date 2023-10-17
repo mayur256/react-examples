@@ -11,7 +11,8 @@ export function AppLinks(): ReactElement {
     const routes: Array<{ key: string, label: string }> = [
         { key: '/', label: 'Home' },
         { key: '/portal', label: 'Portal' },
-        { key: '/useState', label: 'useState' }
+        { key: '/useState', label: 'useState' },
+        { key: '/useEffect', label: 'useEffect' }
     ];
     const activeClass = "bg-blue-400 text-white";
 

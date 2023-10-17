@@ -7,6 +7,7 @@ import { ReactElement, useState } from "react";
 export function StateHook(): ReactElement {
     // state definition
     const [count, setCount] = useState<number>(0);
+    
     return (
         <div className="h-full flex items-center">
             <div className="text-center flex-grow">
