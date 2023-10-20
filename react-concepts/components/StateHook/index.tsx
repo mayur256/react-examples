@@ -24,3 +24,24 @@ export function StateHook(): ReactElement {
         </div>
     )
 }
+
+export function StateInitialiser(): ReactElement {
+
+    // state definition
+    const [todos] = useState<Array<string>>(() => {
+        return [...Array(10).keys()].map(el => `Todo - ${el + 1}`);
+    });
+
+    return (
+        <div className="h-full flex items-center mt-2">
+            <div className="text-center flex-grow">
+                <ul className="mb-2">
+                    {todos.map(el => (
+                        <li key={el}>{el}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    )
+};
+

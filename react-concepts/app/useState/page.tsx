@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
 
 // Constituent components
-import { StateHook } from '@/components/StateHook'
+import { StateHook, StateInitialiser } from '@/components/StateHook'
 
 // Component definition
 export default function UseState() {
@@ -30,6 +30,10 @@ export default function UseState() {
             <p>React allows to pass a function to useState that provisions state initialisation</p>
             <code className='bg-gray-100 p-1 rounded'>{`const [user, setUser] = useState(() => { return { name: storage.name } });`}</code>
             <p>Here <em>storage</em> is basically a local data storage that can be used by react to initialise the component state.</p>
+            <p className='mt-1'>Example: </p>
+            <div className='border-2 mt-2'>
+                <StateInitialiser />
+            </div>
 
         </main>
     )
