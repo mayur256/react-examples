@@ -19,9 +19,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={inter.className} style={{ height: 'unset' }}>
                 <div className='grid grid-cols-6 divide-x grid-rows-1 h-full'>
-                    <div className='p-2'>
+                    <div className='p-2 max-h-screen min-h-screen overflow-auto'>
                         <AppLinks />
                     </div>
                     <div className='col-span-5 p-2'>{children}</div>

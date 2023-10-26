@@ -1,4 +1,5 @@
 // top level imports
+import { EffectHook } from '@/components/EffectHook'
 import type { Metadata } from 'next'
 
 // Component definition
@@ -15,7 +16,7 @@ export default function UseEffect() {
             <p><strong>dependencies</strong> are an array of react properties, be it a <em>state variable, props or context value</em>.</p>
 
             <p className='mt-4'>It has three prevalent versions of usage</p>
-            <ol>
+            <ol className='list-decimal ps-4'>
                 <li>
                     <strong>Without any dependency list</strong>: Runs on initial component rendering and every subsequent re-render.
                 </li>
@@ -34,7 +35,7 @@ export default function UseEffect() {
 
             <p className='mt-4 font-bold'>Example: </p>
             <div className='border-2 mt-2'>
-                My example
+                <EffectHook />
             </div>
         </main>
     )

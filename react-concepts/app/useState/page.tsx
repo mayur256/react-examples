@@ -26,7 +26,7 @@ export default function UseState() {
             <p className='mt-1'>Do this</p>
             <code className='bg-gray-100 p-1 rounded'>{`setUser({...user, name: 'Bob' });`}</code>
 
-            <p className='mt-3 font-bold'>How can use a state initializer?</p>
+            <p className='mt-3 font-bold'>How can we use a state initializer?</p>
             <p>React allows to pass a function to useState that provisions state initialisation</p>
             <code className='bg-gray-100 p-1 rounded'>{`const [user, setUser] = useState(() => { return { name: storage.name } });`}</code>
             <p>Here <em>storage</em> is basically a local data storage that can be used by react to initialise the component state.</p>
@@ -34,7 +34,6 @@ export default function UseState() {
             <div className='border-2 mt-2'>
                 <StateInitialiser />
             </div>
-
         </main>
     )
 }
