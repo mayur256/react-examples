@@ -1,5 +1,5 @@
 // top level imports
-import { EffectHook } from '@/components/EffectHook'
+import { EffectHook, EffectNuances } from '@/components/EffectHook'
 import type { Metadata } from 'next'
 
 // Component definition
@@ -8,7 +8,7 @@ export default function UseEffect() {
         <main>
             <h4 className='text-2xl mb-2 font-bold'>useEffect</h4>
             <p>The <strong>useEffect</strong> hook let us <em>synchronize our React component with some external system</em> </p>
-            <p>It run immediately after the component is rendered and allows us to run some effects at that point</p>
+            <p>It runs immediately after the component is rendered and allows us to run some effects at that point</p>
 
             <h6 className='text-xl mt-4 font-bold'>Synopsis</h6>
             <code className='bg-gray-100 p-1 rounded'>useEffect(setup, dependencies?);</code>
@@ -36,6 +36,14 @@ export default function UseEffect() {
             <p className='mt-4 font-bold'>Example: </p>
             <div className='border-2 mt-2'>
                 <EffectHook />
+            </div>
+
+            <hr className="h-px my-8 bg-gray-400 border-0 dark:bg-gray-700" />
+
+            <p className='mt-4 text-lg font-bold'>The below example demonstrates effect nuances while updating a state within the <em>useEffect</em> hook </p>
+            <p className='mt-2 font-bold'>Example: </p>
+            <div className='border-2 mt-2 p-2 mb-6'>
+                <EffectNuances />
             </div>
         </main>
     )

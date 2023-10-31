@@ -25,7 +25,7 @@ export function EffectHook(): ReactElement {
         console.log(deliveryInfo.address);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deliveryInfo.address])
-    // passing a primitive value in dependency only runs the effect when a filed value has actually changed
+    // passing a primitive value in dependency only runs the effect when a value has actually changed
     // alternatively passing a reference value as dependency causes the effect to run every time a reference to the object changes
 
     /** Utility / handler functions */
@@ -103,3 +103,62 @@ export function EffectHook(): ReactElement {
 
     )
 }
+
+// component to demonstrate effect nuances and cleanup
+export function EffectNuances(): ReactElement {
+    // state definition
+    const [count, setCount] = useState<number>(0);
+
+    // the following update in a useeffect hook is a bad practise
+    /* useEffect(() => {
+        console.count('effect');
+        setInterval(() => setCount(count + 1), 1000);
+    }, [count]); */
+
+    // a simple effect that runs on every mount and with every re-render due to count
+    useEffect(() => {
+        console.log(`%ceffect - ${count}`, "color:white;background:blue");
+        return () => {
+            console.log(`%ccleanup - ${count}`, "color:white;background:green");
+        }
+    }, [count]);
+
+    // the following update mitigates the above issue to an extent
+    // but it is not recommended in react to update state within effect if that state is
+    // already present in the effect's dependency
+    /* useEffect(() => {
+        console.log(`%ceffect - ${count}`, "color:white;background:blue");
+        const interval = setInterval(() => setCount(prevCount => prevCount + 1), 1000);
+        
+        // this function is called a cleanup function and runs at the following times
+        // 1. component unmounts
+        // 2. every re-render with changed dependencies
+        // 3. in development/strict mode when component mounts
+        return () => {
+            console.log(`%ccleanup - ${count}`, "color:white;background:green");
+            clearInterval(interval); // clears intervals from last render
+        }
+    }, [count]); */
+    
+    return (
+        <>
+            <p>Count: {count}</p>
+            <div className="mt-2">
+                <button
+                    onClick={() => setCount(prev => prev + 1)}
+                    type="button"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                    Increase
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setCount(prev => prev - 1)}
+                    className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
+                    Decrease
+                </button>
+            </div>
+        </>
+    )
+};
