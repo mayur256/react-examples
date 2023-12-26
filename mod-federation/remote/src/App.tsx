@@ -1,8 +1,9 @@
-import { ReactElement, useState } from 'react'
-import './App.css'
+import { ReactElement } from 'react';
+import useCount from './store';
+import './App.css';
 
 function App(): ReactElement {
-    const [count, setCount] = useState<number>(0);
+    const [count, setCount] = useCount();
 
     return (
         <div className="remote-app-container">
