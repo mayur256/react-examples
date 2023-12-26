@@ -16,3 +16,10 @@
 - Each micro-frontend is a **self-contained** module that can be _developed, tested, and deployed independently_.
   
 ![image](https://github.com/mayur256/react-examples/assets/39913092/55073f0b-9d12-4112-8146-bdcbb559dda0)
+
+## Example
+- In this example we will implement a very **rudimentary** demonstration of **runtime** module federation with two independent apps namely _host_ and _remote_.
+- Remote app will have a simple state and a button to mutate that state.
+- Host app will import the remote app and use components and state from it.
+- We will be using **vite module federation plugin** for this example.
+- What we want to demonstrate here is that when a state is changed in a remote app with some user interaction say button click, this state change effect should be instantaneously reflected on the host app.
