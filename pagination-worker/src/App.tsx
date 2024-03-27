@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Ref, useEffect, useRef, useState } from "react";
 
 import { Box, TextField } from "@mui/material";
 import Select, { SingleValue } from 'react-select'
@@ -19,10 +19,24 @@ export default function App() {
     ];
 
     const [users, setUsers] = useState<User[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+
+
     const backupUsers = useRef<User[]>([]);
+    const workerRef = useRef<Worker | null>(null);
 
     useEffect(() => {
         fetchUsers();
+        workerRef.current = new Worker('worker.js');
+        if (workerRef.current?.onmessage === null) {
+            workerRef.current.onmessage = (event): void => {
+                const messagePayload = event.data;
+                setUsers(messagePayload.data);
+                setLoading(false)
+            }
+        }
+
+        return () => workerRef.current?.terminate();
     }, [])
 
     const fetchUsers = () => {
@@ -46,34 +60,28 @@ export default function App() {
 
     const onSortSelect = async (newVal: SingleValue<{ value: string, label: string }>): Promise<void> => {
         if (!newVal) return;
+        setLoading(true)
         
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        const sortedUsers = backupUsers.current.toSorted((a: User, b: User): number => {
-            if (newVal.value === "age") {
-                return a.age - b.age;
-            }
-
-            const key = newVal.value as keyof Omit<User, 'age'>;
-
-            return a[key].localeCompare(b[key], 'en')
+        workerRef.current?.postMessage({
+            type: "sort",
+            data: { items: backupUsers.current, newVal }
         });
-
-        setUsers(sortedUsers)
+        
     }
 
-    const onSearchBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const onSearchBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
         const searchKey = event.target.value?.trim()?.toLocaleLowerCase();
+
+        setLoading(true);
+
         if (searchKey) {
-            const filteredUsers = backupUsers.current.filter((user: User): boolean => {
-                return (user.name.toLocaleLowerCase().includes(searchKey)
-                    || user.email.toLocaleLowerCase().includes(searchKey)
-                    || user.address.toLocaleLowerCase().includes(searchKey)
-                    || user.zodiac.toLocaleLowerCase().includes(searchKey)
-                )
+            workerRef.current?.postMessage({
+                type: "filter",
+                data: { items: backupUsers.current, searchKey }
             })
-            setUsers(filteredUsers)
         } else {
             setUsers(backupUsers.current);
+            setLoading(false);
         }
     }
 
@@ -87,7 +95,7 @@ export default function App() {
                 <Select placeholder="Sort" options={options} onChange={onSortSelect} />
             </Box>
 
-            <CustomTable users={users} />
+            <CustomTable users={users} loading={loading} />
 
             {/* <CustomPaginate /> */}
         </Box>

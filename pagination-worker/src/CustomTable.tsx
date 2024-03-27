@@ -7,14 +7,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { User } from './types';
 
 
 interface IProps {
-    users: Array<User>
+    users: Array<User>,
+    loading: boolean
 }
 
-export function CustomTable({ users }: IProps): ReactElement {
+export function CustomTable({ users, loading }: IProps): ReactElement {
     return (
         <TableContainer component={Paper} sx={{ maxHeight: 600, overflowY: 'auto' }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -30,7 +34,7 @@ export function CustomTable({ users }: IProps): ReactElement {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {users.map((user: User, index: number): ReactElement => (
+                    {!loading && users.map((user: User, index: number): ReactElement => (
                         <TableRow
                             key={`${user.name}-${index}`}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -48,6 +52,12 @@ export function CustomTable({ users }: IProps): ReactElement {
                             <TableCell align="right">{user.zodiac}</TableCell>
                         </TableRow>
                     ))}
+
+                    {loading && (
+                        <TableRow sx={{ display: 'flex' }}>
+                            <TableCell><CircularProgress /></TableCell>
+                        </TableRow>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>
