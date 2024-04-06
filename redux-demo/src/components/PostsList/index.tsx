@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { extractPosts, fetchPosts } from "../../store/reducers/post.slice";
 import { AppDispatch } from "../../store";
 
-export function Posts(): ReactElement {
+export function PostsList(): ReactElement {
 
     const dispatch = useDispatch<AppDispatch>();
 
