@@ -21,7 +21,11 @@ export function PostsList(): ReactElement {
     return (
         <>
             {posts.map(post => (
-                <div className="container mt-1" key={post.id}>
+                <div
+                    data-testid="post"
+                    className="container mt-1"
+                    key={post.id}
+                >
                     <div className="card" >
                         <div className="card-body">
                             <h5 className="card-title">{post.title}</h5>
