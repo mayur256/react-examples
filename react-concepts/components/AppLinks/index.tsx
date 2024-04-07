@@ -12,7 +12,8 @@ export function AppLinks(): ReactElement {
         { key: '/', label: 'Home' },
         { key: '/portal', label: 'Portal' },
         { key: '/useState', label: 'useState' },
-        { key: '/useEffect', label: 'useEffect' }
+        { key: '/useEffect', label: 'useEffect' },
+        { key: '/hoc', label: 'HOC' }
     ];
     const activeClass = "bg-blue-400 text-white";
 
