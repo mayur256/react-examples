@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
 */
-// import userEvent from "@testing-library/user-event";
-import { fireEvent, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/react";
 import { customRender } from "../../utils/test-utils"
 
 // Subject component
@@ -17,18 +17,19 @@ describe('Fileupload', (): void => {
     });
 
     test('It allows us to select a file for upload', async () => {
-        // const user = userEvent.setup();
+        const user = userEvent.setup();
 
-        const { getByText, getByTestId } = customRender(<FileUpload />);
+        const { getByTestId } = customRender(<FileUpload />);
 
-        const fileEl = getByTestId("file-input");
+        const fileEl = getByTestId("file-input") as HTMLInputElement;
 
         const file = new File(['Hello'], 'Hello.txt', { type: 'text/plain' })
 
-        await fireEvent.change(fileEl, { target: { files: [file] } });
+        user.upload(fileEl, file);
 
-        console.log(fileEl)
-
+        await waitFor(() => {
+            expect(fileEl.files).toHaveLength(1);
+        })
 
     })
 })
