@@ -10,14 +10,19 @@ import { render, RenderOptions, RenderResult } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../store";
 
-const StoreProvider = ({ children }: { children: ReactNode }): ReactElement => {
+// React router
+import { MemoryRouter } from 'react-router-dom';
+
+const AppProviders = ({ children }: { children: ReactNode }): ReactElement => {
     return (
-        <Provider store={store}>
-            {children}
-        </Provider>
+        <MemoryRouter initialEntries={['/']}>
+            <Provider store={store}>
+                {children}
+            </Provider>
+        </MemoryRouter>
     )
 }
 
 export const customRender = (ui: ReactElement, options?: RenderOptions): RenderResult => {
-    return render(ui, { wrapper: StoreProvider, ...options })
+    return render(ui, { wrapper: AppProviders, ...options })
 }
