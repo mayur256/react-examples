@@ -16,7 +16,8 @@ export function Product(): ReactElement {
 
     const { data: product, isLoading } = useQuery({
         queryKey: ['product', id],
-        queryFn: () => fetchProductById(id ?? '')
+        queryFn: () => fetchProductById(id ?? ''),
+        staleTime: 30 * 1000
     })
 
     /* useEffect(() => {

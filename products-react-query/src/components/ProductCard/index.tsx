@@ -1,14 +1,15 @@
 import { ReactElement } from "react";
 
 import { Link } from "react-router-dom";
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import { Product } from "../../utils/types";
 
 interface IProps {
-    product: Partial<Product>
+    product: Partial<Product>,
+    deleteProduct: (id: string) => void
 }
 
-export function ProductCard({ product }: IProps): ReactElement {
+export function ProductCard({ product, deleteProduct }: IProps): ReactElement {
     const { title, price, rating, image } = product;
     return (
         <Card
@@ -79,6 +80,13 @@ export function ProductCard({ product }: IProps): ReactElement {
                 >
                     See more
                 </Link>
+
+                <Button
+                    onClick={() => deleteProduct(product?.id + "")}
+                    color="red"
+                >
+                    Delete
+                </Button>
             </div>
         </Card>
     )

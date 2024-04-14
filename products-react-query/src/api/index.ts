@@ -12,3 +12,13 @@ export const fetchProductById = async (prodId: string): Promise<Product | undefi
     }
     
 }
+
+export const deleteProductById = async (prodId: string): Promise<Product | undefined> => {
+    if (prodId) {
+        const res = await fetch("https://fakestoreapi.com/products/" + prodId, {
+            method: 'DELETE'
+        });
+        return await res.json()
+    }
+    
+}
