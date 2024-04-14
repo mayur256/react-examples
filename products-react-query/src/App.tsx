@@ -1,13 +1,24 @@
-import { Button } from "flowbite-react";
+import { ReactElement } from "react";
+import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom"
+import { Products } from "./pages/Products";
+import { Product } from "./pages/Product";
+import { AddEditProduct } from "./pages/AddEditProduct";
 
-function App() {
+function App(): ReactElement {
+    const routes = createBrowserRouter([
+        {
+            path: '/',
+            element: <Outlet />,
+            children: [
+                { path: "/products", element: <Products /> },
+                { path: "product/view/:id", element: <Product /> },
+                { path: "product/add-update/:id", element: <AddEditProduct /> },
+            ]
+        },
+    ]);
+
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">
-            React Query example
-        </h1>
-        <Button>Click me</Button>
-        </div>
+        <RouterProvider router={routes} />
     )
 }
 
