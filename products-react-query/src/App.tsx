@@ -1,8 +1,16 @@
 import { ReactElement } from "react";
 import { RouterProvider, createBrowserRouter, Outlet } from "react-router-dom"
+
+import {
+    QueryClient,
+    QueryClientProvider,
+  } from '@tanstack/react-query'
+
 import { Products } from "./pages/Products";
 import { Product } from "./pages/Product";
 import { AddEditProduct } from "./pages/AddEditProduct";
+
+const queryClient = new QueryClient();
 
 function App(): ReactElement {
     const routes = createBrowserRouter([
@@ -18,7 +26,9 @@ function App(): ReactElement {
     ]);
 
     return (
-        <RouterProvider router={routes} />
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={routes} />
+        </QueryClientProvider>
     )
 }
 
