@@ -5,6 +5,7 @@ import {
     QueryClient,
     QueryClientProvider,
   } from '@tanstack/react-query'
+  import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import { Products } from "./pages/Products";
 import { Product } from "./pages/Product";
@@ -19,7 +20,7 @@ function App(): ReactElement {
             element: <Outlet />,
             children: [
                 { path: "/products", element: <Products /> },
-                { path: "product/view/:id", element: <Product /> },
+                { path: "product/:id", element: <Product /> },
                 { path: "product/add-update/:id", element: <AddEditProduct /> },
             ]
         },
@@ -27,6 +28,7 @@ function App(): ReactElement {
 
     return (
         <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
             <RouterProvider router={routes} />
         </QueryClientProvider>
     )

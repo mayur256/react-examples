@@ -5,12 +5,17 @@ import { useQuery } from "@tanstack/react-query"
 
 import { getAllProducts } from "../../api";
 import { Product } from "../../utils/types";
+import { Loader } from "../../components/Loader";
 
 export function Products(): ReactElement {
-    const { data: products } = useQuery({
+    const { data: products, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: getAllProducts
     });
+
+    if (isLoading) {
+        return <Loader />
+    }
     
     return (
         <div className="bg-white py-24 sm:py-32">
