@@ -6,7 +6,7 @@ export default function useSyncExternalStore(): ReactElement {
     return (
         <main>
             <h4 className='text-2xl mb-2 font-bold'>useSyncExternalStore</h4>
-            <p><strong>useSyncExternalStore</strong> is a React Hook that lets you subscribe to ab external data source.</p>
+            <p><strong>useSyncExternalStore</strong> is a React Hook that lets you subscribe to an external data source.</p>
             
             <code className='bg-gray-100 p-1 rounded'>const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)</code>
 
